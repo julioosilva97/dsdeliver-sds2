@@ -34,6 +34,7 @@ public class Order implements Serializable {
 	joinColumns = @JoinColumn(name="order_id"),//tabela atual 
 	inverseJoinColumns = @JoinColumn(name="product_id"))//a outra tabela)
 	private Set<Product> products = new HashSet<>();
+	
 
 	public Long getId() {
 		return id;
@@ -100,6 +101,16 @@ public class Order implements Serializable {
 		this.status = status;
 	}
 
+	
+	public Double getTotal() {
+		double sum = 0.0;
+		for (Product p : products) {
+			sum += p.getPrice();
+		}
+		
+		return sum;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
